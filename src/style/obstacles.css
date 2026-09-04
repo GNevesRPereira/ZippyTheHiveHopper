@@ -1,0 +1,33 @@
+.obstacles {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+}
+
+.obstacle {
+  position: absolute;
+}
+
+.obstacle--cactus-small {
+  width: 45px;
+  height: 70px;
+  content: url(../images/Cactus.png);
+}
+
+.obstacle--cactus-medium {
+  width: 70px;
+  height: 90px;
+  content: url(../images/Cactus.png);
+}
+
+.obstacle--cactus-large {
+  width: 80px;
+  height: 110px;
+  content: url(../images/Cactus.png);
+}
+
+.obstacle--rock {
+  width: 90px;
+  height: 70px;
+  content: url(../images/boulder.png);
+}

@@ -1,0 +1,217 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Zippy the Hive Hopper</title>
+    <link
+        rel="icon"
+        type="image/png"
+        href="./src/images/favicon-16x16.png"
+        sizes="16x16"
+       >
+    <link
+        rel="icon"
+        type="image/png"
+        href="./src/images/favicon-32x32.png"
+        sizes="32x32"
+        >
+    <link rel="stylesheet" href="./src/style/global.css">
+    <link rel="stylesheet" href="./src/style/player.css">
+    <link rel="stylesheet" href="./src/style/obstacles.css">
+    <link rel="stylesheet" href="./src/style/controls.css">
+    <meta
+        name="description"
+        content="Zippy the Hive Hopper is a modular browser game built with HTML, CSS, and vanilla JavaScript, featuring dynamic obstacles, collision detection, dynamic difficulty, score, health, audio controls, and multiple game states."
+        >
+    <link
+        rel="canonical"
+        href="https://manuelcappai94.github.io/js-jumping-game"
+        >
+    <meta property="og:type" content="website">
+    <meta property="og:title" content="Zippy the Hive Hopper">
+    <meta 
+        property="og:image"
+        content="https://manuelcappai94.github.io/js-jumping-game/src/images/zippy-game-preview.jpg"
+        >
+    <meta
+        property="og:image:alt"
+        content="Gameplay screenshot of Zippy the Hive Hopper"
+        >
+    <meta property="og:image:width" content="948">
+    <meta property="og:image:height" content="358">
+    <meta
+        property="og:description"
+        content="A modular HTML, CSS, and vanilla JavaScript browser game with dynamic obstacles, dynamic difficulty, collision detection, score, health, audio controls, pause, retry, and game-over states."
+        >
+    <meta
+        property="og:url"
+        content="https://manuelcappai94.github.io/js-jumping-game"
+        >
+        
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="Zippy the Hive Hopper">
+    <meta
+        name="twitter:description"
+        content="A modular browser game built with HTML, CSS, and vanilla JavaScript."
+        >
+    <meta
+        name="twitter:image"
+        content="https://manuelcappai94.github.io/js-jumping-game/src/images/zippy-game-preview.jpg"
+        >
+
+    <script type="module" src="./src/script.js" defer></script>
+</head>
+<body>
+    <main class="main">
+
+         <aside class="mobile-orientation-alert" aria-label="Mobile gameplay tip">
+            <p>Mobile tip: rotate your device to landscape mode for a better experience.</p>
+        </aside>
+
+        <section class="game" aria-label="Zippy the Hive Hopper game area">
+            <section class="main-menu" aria-label="Main menu">
+                <picture class="zippyLogo">
+                    <img src="./src/images/logo.png" alt="Zippy the Hive Hopper logo">
+                </picture>
+               <p class="keyboard-controls-text">
+                    Controls: A / D to move, Space to jump, P or Esc to pause
+                </p>
+
+                <p class="touch-controls-text">
+                    Touch controls: use the arrows to move, A to jump, and ☰ to pause.
+                </p>
+
+                <label class="volume-control">
+                    <span>Volume</span>
+                    <input class="volume-slider" type="range" min="0" max="100" value="60" aria-label="Game volume">
+                </label>
+                <div class="actions-container">
+                    <button class="action-btn" data-action="start" type="button">Start</button>
+                    <button class="action-btn" data-action="exit" type="button">Exit</button>
+                </div>
+            </section>
+
+            <section class="pause-menu hide-pause-menu" aria-labelledby="pause-title">
+                <h2 id="pause-title">Paused</h2>
+                <p>Press P or Esc, or tap Resume to continue.</p>
+                <label class="volume-control">
+                    <span>Volume</span>
+                    <input class="volume-slider" type="range" min="0" max="100" value="60" aria-label="Game volume">
+                </label>
+                <div class="actions-container">
+                    <button class="action-btn" data-action="resume" type="button">Resume</button>
+                    <button class="action-btn action-btn--secondary" data-action="main-menu" type="button">Main Menu</button>
+                </div>
+            </section>
+
+            <section class="game-over-menu hide-game-over-menu" aria-labelledby="game-over-title">
+                <h2 id="game-over-title">Game Over</h2>
+                <p>You ran out of health.</p>
+                <p class="final-score">Final score: 0</p>
+                <label class="volume-control">
+                    <span>Volume</span>
+                    <input class="volume-slider" type="range" min="0" max="100" value="60" aria-label="Game volume">
+                </label>
+                <div class="actions-container">
+                    <button class="action-btn" data-action="retry" type="button">Retry</button>
+                    <button class="action-btn action-btn--secondary" data-action="main-menu" type="button">Main Menu</button>
+                </div>
+            </section>
+
+            <div class="game-layer game-layer--sky" aria-hidden="true"></div>
+            <div class="game-layer game-layer--background" aria-hidden="true"></div>
+
+            <div class="game-layer game-layer--main">
+                <div class="hud">
+                    <span id="score-display">Score 00</span>
+
+                     <div class="health-status">
+                        <span class="health-status__label">HP</span>
+                        <div
+                         class="health-bar"
+                          role="meter" aria-label="Player health"
+                           aria-valuemin="0"
+                            aria-valuemax="100"
+                             aria-valuenow="100"
+                             >
+                            <div class="health-bar__fill"></div>
+                        </div>
+                        <span class="health-status__value">100%</span>
+                    </div>
+
+                    <label class="hud-volume">
+                        <span>Vol</span>
+                        <input class="volume-slider" type="range" min="0" max="100" value="60" aria-label="Game volume">
+                    </label>
+
+                     <button
+                        class="hud-pause-btn"
+                        data-action="pause"
+                        type="button"
+                        aria-label="Pause game"
+                        >
+                        ☰
+                    </button>
+                </div>
+
+
+                <div class="player" id="player" aria-hidden="true">
+                    <canvas class="player-sprite" width="100" height="190"></canvas>
+                </div>
+
+                <div class="obstacles" aria-hidden="true"></div>
+
+                <div class="ground" aria-hidden="true"></div>
+
+                <div class="touch-controls" role="group" aria-label="Touch controls">
+                    <div class="touch-controls__movement">
+                        <button
+                            class="touch-control-btn"
+                            data-control="left"
+                            type="button"
+                            aria-label="Move left"
+                        >
+                            <svg
+                                class="touch-control-icon"
+                                viewBox="0 0 24 24"
+                                aria-hidden="true"
+                                focusable="false"
+                            >
+                                <path d="M15.5 5L8.5 12L15.5 19V5Z"></path>
+                            </svg>  
+                        </button>
+
+                        <button
+                            class="touch-control-btn"
+                            data-control="right"
+                            type="button"
+                            aria-label="Move right"
+                        >
+                            <svg
+                                class="touch-control-icon"
+                                viewBox="0 0 24 24"
+                                aria-hidden="true"
+                                focusable="false"
+                            >
+                                <path d="M8.5 5L15.5 12L8.5 19V5Z"></path>
+                            </svg>
+                        </button>
+                    </div>
+
+                    <div class="touch-controls__action">
+                        <button
+                            class="touch-control-btn touch-control-btn--jump"
+                            data-control="jump"
+                            type="button"
+                            aria-label="Jump"
+                        >
+                            A
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+</body>
+</html>

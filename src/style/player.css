@@ -1,0 +1,83 @@
+.player {
+    position: absolute;
+
+    left: 0;
+    bottom: 42px;
+
+    /*
+     * This is still the player's collision area.
+     * The visible sprite is larger than the hitbox.
+     */
+
+    width: 60px;
+    height: 190px;
+
+    pointer-events: none;
+}
+
+.player-sprite {
+    position: absolute;
+
+    /*
+     * The canvas is wider than the collision box so
+     * the character can extend slightly beyond it.
+     */
+
+    left: -20px;
+    bottom: 0;
+
+    width: 120px;
+    height: 190px;
+
+    display: block;
+
+    /*
+     * Keep the artwork smooth rather than pixelated.
+     */
+
+    image-rendering: auto;
+}
+
+.damage {
+    animation: player-flash 1s ease;
+}
+
+@keyframes player-flash {
+
+    0% {
+        filter: brightness(1);
+    }
+
+    20% {
+        filter: brightness(4.2);
+    }
+
+    40% {
+        filter: brightness(2.2);
+    }
+
+    50% {
+        filter: brightness(4.2);
+    }
+
+    60% {
+        filter: brightness(2.2);
+    }
+
+    70% {
+        filter: brightness(4.2);
+    }
+
+    80% {
+        filter: brightness(2.2);
+    }
+
+    90% {
+        filter: brightness(4.2);
+    }
+
+    100% {
+        filter: brightness(1);
+    }
+
+}
